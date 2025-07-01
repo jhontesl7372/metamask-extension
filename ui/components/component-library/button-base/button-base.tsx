@@ -55,7 +55,7 @@ export const ButtonBase: ButtonBaseComponent = React.forwardRef(
     // `target="_blank"` or when the `externalLink` helper flag is used.
     const isTargetBlank =
       (href && externalLink) ||
-      ((tagProps as Record<string, unknown>).target === '_blank');
+      ((tagProps as { target?: string }).target === '_blank');
 
     return (
       <Text
