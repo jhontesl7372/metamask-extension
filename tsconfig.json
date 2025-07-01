@@ -10,6 +10,8 @@
     "jsx": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "types": ["node", "react", "react-dom"],
     // todo: make two tsconfigs, one for node (development and test) and one for
     // browser (app, ui, shared?) and ensure the code is split up into the right
     // directories that make sense for their environment.
