@@ -50,6 +50,13 @@ export const ButtonBase: ButtonBaseComponent = React.forwardRef(
     const tag = href ? 'a' : as || 'button';
     const tagProps = href && tag === 'a' ? { href, ...props } : props;
 
+    // Determine if the rendered element will open in a new tab. We consider
+    // it "target blank" either when the caller explicitly provided
+    // `target="_blank"` or when the `externalLink` helper flag is used.
+    const isTargetBlank =
+      (href && externalLink) ||
+      ((tagProps as Record<string, unknown>).target === '_blank');
+
     return (
       <Text
         as={tag}
@@ -58,9 +65,9 @@ export const ButtonBase: ButtonBaseComponent = React.forwardRef(
         color={loading ? TextColor.transparent : color}
         ref={ref}
         {...(tag === 'button' ? { disabled } : {})}
-        {...(href && externalLink
-          ? { target: '_blank', rel: 'noopener noreferrer' }
-          : {})}
+        {...(href && externalLink ? { target: '_blank' } : {})}
+        {...(tagProps as TextProps<C>)}
+        {...(isTargetBlank ? { rel: 'noopener noreferrer' } : {})}
         padding={0}
         paddingLeft={4}
         paddingRight={4}
@@ -87,7 +94,6 @@ export const ButtonBase: ButtonBaseComponent = React.forwardRef(
         justifyContent={JustifyContent.center}
         alignItems={AlignItems.center}
         borderRadius={BorderRadius.XL}
-        {...(tagProps as TextProps<C>)}
       >
         {startIconName && (
           <Icon
