@@ -8,6 +8,8 @@
     // makes typechecking faster (also see `tsBuildInfoFile` setting)
     "incremental": true,
     "jsx": "react",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     // todo: make two tsconfigs, one for node (development and test) and one for
     // browser (app, ui, shared?) and ensure the code is split up into the right
     // directories that make sense for their environment.
